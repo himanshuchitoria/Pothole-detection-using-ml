@@ -1,0 +1,12 @@
+{
+  "name": "Your Flask App Name",  # Replace with your app's name
+  "short_name": "Flask App",  # Optional shorter name for display
+  "description": "A basic Flask web application.",  # Brief description
+  "icons": [
+    {
+      "src": "static/icon-192x192.png",  # Replace with your icon path
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Disease Prediction Result | Health Horizon</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="stylesheet" href="/static/predict_st.css">
+    
+    <style>
+      body {
+          background-color: #fff; /* white background */
+          color: #000; /* black text */
+      }
+  
+      /* Container for the form */
+      .form-container {
+          width: 100%;
+          max-width: 600px; /* Set maximum width for the form */
+          margin: 0 auto; /* Center the form horizontally */
+          padding: 20px; /* Add some padding */
+          border: 1px solid #000; /* Add a border for better visibility */
+          display: grid;
+          grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */
+          grid-gap: 10px; /* Add some gap between grid items */
+          justify-items: center; /* Center items horizontally within each column */
+      }
+  
+      /* Style for checkboxes */
+      input[type="checkbox"] {
+          display: none; /* Hide the default checkboxes */
+      }
+  
+      /* Style for label buttons */
+      label {
+          display: inline-block;
+          padding: 10px 20px; /* Add padding to create button-like appearance */
+          background-color: #ddd; /* Light gray background */
+          color: #000; /* Black text */
+          border: 1px solid #000; /* Add border for button-like appearance */
+          cursor: pointer; /* Change cursor to pointer on hover */
+          text-align: center; /* Center text horizontally */
+          width: calc(100% - 22px); /* Adjusted width for each label */
+          transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+      }
+  
+      /* Hover effect for label buttons */
+      label:hover {
+          background-color: #ff6b6b; /* Darker gray background on hover */
+          color: #fff; /* White text on hover */
+      }
+  
+      /* Change color to black when checkbox is checked */
+      input[type="checkbox"]:checked + label {
+          background-color: #000; /* Black background when checked */
+          color: #fff; /* White text when checked */
+      }
+  
+      /* Style for submit button */
+      .submit-button {
+          margin-top: 20px; /* Add space between form and button */
+          display: block; /* Make the submit button a block element */
+          width: 100%; /* Full width */
+      }
+  </style>
+
+
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <span class="brand-name">HEALTH</span>
+          <span class="brand-horizon">HORIZON</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{{ url_for('home')}}"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{{ url_for('predict')}}"
+                >Predict</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{{ url_for('about')}}"
+                >About Model</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">Testimonials</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">FAQ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{{ url_for('contact')}}">Contact</a>
+            </li>
+          </ul>
+          <a href="#">
+            <img src="https://imgs.search.brave.com/JIyFdvPo5MvFYWKIL8g0Uo5xDY24PoWxrWIoa3u9rAk/rs:fit:500:0:0/g:ce/aHR0cHM6Ly92aXRi/aG9wYWwuYWMuaW4v/aW5jL3VwbG9hZHMv/MjAxOS8xMi9sb2dv/LnBuZw" 
+                 alt="Logo" 
+                 width="200" 
+                 height="100"> 
+        </a>
+        </div>
+      </div>
+    </nav>
+    <h2>Choose options:</h2>
+    <div class="form-container">
+      <form action="/predict" method="post">
+          {% for item in col1 %}
+          <input type="checkbox" id="{{ item }}" name="option" value="{{ item }}">
+          <label for="{{ item }}">{{ item }}</label>
+          {% endfor %}
+          <input type="submit" class="submit-button" value="Submit">
+      </form>
+  </div>
+  
+    
+    <pre>
+      {{ Result}}
+    </pre>
+      <!-- {{ Result}} -->
+
+    
+    <div class="footer-line">Submitted to Dr. Sanat Jain</div>
+
+    <script>
+      const healthQuotes = [
+        "The greatest wealth is health. - Virgil",
+        "Happiness is nothing more than good health and a bad memory. - Albert Schweitzer",
+        "Health is the crown on the well person's head that only the ill person can see. - Robin Sharma",
+        "Take care of your body. It's the only place you have to live. - Jim Rohn",
+        "To keep the body in good health is a duty... otherwise we shall not be able to keep our mind strong and clear. - Buddha",
+        "The only way to keep your health is to eat what you don't want, drink what you don't like, and do what you'd rather not. - Mark Twain",
+        "A healthy outside starts from the inside. - Robert Urich",
+        "Health is like money, we never have a true idea of its value until we lose it. - Josh Billings",
+      ];
+
+      // Function to get a random quote from the healthQuotes array
+      function getRandomHealthQuote() {
+        return healthQuotes[Math.floor(Math.random() * healthQuotes.length)];
+      }
+
+      // Set a random health quote when the page loads
+      document.getElementById("quote").innerText = getRandomHealthQuote();
+
+      
+
+    </script>
+    
+  </body>
+</html>
